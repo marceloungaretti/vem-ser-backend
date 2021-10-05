@@ -21,7 +21,5 @@ public class Exercicio3 {
         if (valorPago > valorDoPedido) {
             System.out.println("Seu troco é de " + troco + " reais. Obrigado pela preferência!");
         }
-
-
     }
 }
