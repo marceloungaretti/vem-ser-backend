@@ -18,30 +18,5 @@ public class Exercicio1 {
                 + nome + ", você tem "
                 + idade + " anos, é da cidade de "
                 + cidade + ", situada no estado de " + estado);
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
