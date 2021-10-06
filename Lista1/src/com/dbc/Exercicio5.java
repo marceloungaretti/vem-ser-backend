@@ -21,7 +21,6 @@ public class Exercicio5 {
         double valorExtra2 = horasExtras50 * valorHora * 1.5;
 
         double salarioBruto = salarioBase + valorExtra + valorExtra2;
-
         System.out.println("Seu salário bruto é de R$ " + salarioBruto);
     }
 }
