@@ -22,7 +22,5 @@ public class ExercicioAula {
         System.out.println("Soma da linha 1: " + somaLinha1);
         System.out.println("Soma da linha 2: " + somaLinha2);
         System.out.println("LINHA 1 - LINHA 2 = " + (somaLinha1 - somaLinha2));
-
-
     }
 }

@@ -13,7 +13,6 @@ public class ExercicioAula3 {
             System.out.println("Digite um valor: ");
             valores[valor] = scanner.nextInt();
             sum = sum + valores[valor];
-
         }
         System.out.println("SOMA DOS VALORES: " + sum + "\nMÉDIA: " + sum / numeros);
     }
