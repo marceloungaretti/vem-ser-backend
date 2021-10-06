@@ -1,4 +1,4 @@
-package com.dbc;
+package com.dbc.Lista1;
 
 public class Main {
 

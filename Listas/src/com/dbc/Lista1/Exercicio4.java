@@ -1,4 +1,4 @@
-package com.dbc;
+package com.dbc.Lista1;
 
 import java.util.Objects;
 import java.util.Scanner;
