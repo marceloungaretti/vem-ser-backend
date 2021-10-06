@@ -12,12 +12,15 @@ public class Exercicio5 {
         int horaTrabalhadas = scanner.nextInt();
         double salarioBase = horaTrabalhadas * valorHora;
 
-        System.out.println("Insira o número de horas extras: ");
+        System.out.println("Insira o número de horas extras (100%): ");
         int horasExtras = scanner.nextInt();
-
         double valorExtra = horasExtras * valorHora * 2;
 
-        double salarioBruto = salarioBase + valorExtra;
+        System.out.println("Insira o número de horas extras (50%): ");
+        int horasExtras50 = scanner.nextInt();
+        double valorExtra2 = horasExtras50 * valorHora * 1.5;
+
+        double salarioBruto = salarioBase + valorExtra + valorExtra2;
 
         System.out.println("Seu salário bruto é de R$ " + salarioBruto);
     }
