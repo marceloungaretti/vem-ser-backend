@@ -1,12 +1,12 @@
 package com.dbc.Lista2;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ExercicioAula3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int numeros = 3;
+        System.out.println("Quantos números serão usados?");
+        int numeros = scanner.nextInt();
         int[] valores = new int[numeros];
         int sum = 0;
         for (int valor : valores) {
