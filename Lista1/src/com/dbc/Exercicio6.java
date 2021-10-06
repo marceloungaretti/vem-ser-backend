@@ -43,14 +43,5 @@ public class Exercicio6 {
             default:
                 System.out.println("Esta palavra não é válida.");
         }
-
-
-
-
-
-
     }
-
-
-
 }
