@@ -2,7 +2,7 @@ package com.dbc.Lista2;
 
 import java.util.Scanner;
 
-public class Tema7 {
+public class Exercicio7 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int[][] matriz = new int[4][4];

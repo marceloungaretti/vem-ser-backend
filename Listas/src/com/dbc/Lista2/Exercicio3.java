@@ -1,7 +1,7 @@
 package com.dbc.Lista2;
 import java.util.Scanner;
 
-public class Tema3 {
+public class Exercicio3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int jogadoresCadastrados = 0;

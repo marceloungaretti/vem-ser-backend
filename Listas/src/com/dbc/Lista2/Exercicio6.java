@@ -2,7 +2,7 @@ package com.dbc.Lista2;
 
 import java.util.Scanner;
 
-public class Tema6 {
+public class Exercicio6 {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int[] valores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
