@@ -9,11 +9,6 @@ public class Pessoa {
     }
 
     public int diferencaIdade(Pessoa pessoa) {
-        int diferenca = this.idade - pessoa.idade;
-        return diferenca;
+        return this.idade - pessoa.idade;
     }
-
-
-
-
 }

@@ -21,5 +21,4 @@ public class Pessoa {
     public void mandarWhatsapp(Pessoa pessoa, String mensagem) {
         System.out.println(nome + " enviou: " + mensagem + " para " + pessoa.nome);
     }
-
 }

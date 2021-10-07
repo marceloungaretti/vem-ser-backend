@@ -18,6 +18,5 @@ public class Main {
         System.out.println(PessoaX.retornarNomeCompleto());
         System.out.println(PessoaX.ehMaiorDeIdade());
         PessoaX.mandarWhatsapp(PessoaY, "Bom dia");
-
     }
 }

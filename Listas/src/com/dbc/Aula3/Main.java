@@ -12,8 +12,5 @@ public class Main {
 
         maicon.diferencaIdade(guilherme);
         System.out.println(maicon.diferencaIdade(guilherme));
-
-
-
     }
 }
