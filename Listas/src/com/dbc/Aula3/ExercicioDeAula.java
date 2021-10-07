@@ -1,4 +1,4 @@
-package com.dbc.Lista3;
+package com.dbc.Aula3;
 
 public class ExercicioDeAula {
 

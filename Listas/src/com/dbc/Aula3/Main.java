@@ -2,15 +2,21 @@ package com.dbc.Aula3;
 
 public class Main {
     public static void main(String[] args) {
-        Pessoa maicon = new Pessoa();
-        maicon.nome = "Maicon";
-        maicon.idade = 30;
+        Pessoa PessoaX = new Pessoa();
+        PessoaX.nome = "João";
+        PessoaX.sobrenome = "Batista";
+        PessoaX.idade = 22;
+        PessoaX.whatsapp = "999999999";
 
-        Pessoa guilherme = new Pessoa();
-        guilherme.nome = "Guilherme";
-        guilherme.idade = 22;
+        Pessoa PessoaY = new Pessoa();
+        PessoaY.nome = "Mário";
+        PessoaY.sobrenome = "Armário";
+        PessoaY.idade = 13;
+        PessoaY.whatsapp = "888888888";
 
-        maicon.diferencaIdade(guilherme);
-        System.out.println(maicon.diferencaIdade(guilherme));
+        PessoaX.conversar(PessoaY);
+        System.out.println(PessoaX.retornarNomeCompleto());
+        System.out.println(PessoaX.ehMaiorDeIdade());
+        PessoaX.mandarWhatsapp(PessoaY, "Bom dia");
     }
 }
