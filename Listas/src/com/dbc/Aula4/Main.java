@@ -2,6 +2,9 @@ package com.dbc.Aula4;
 
 public class Main {
     public static void main(String[] args) {
+
+        Pessoa moises = new Pessoa("Moisés", "Silva");
+
         Pessoa PessoaX = new Pessoa();
         PessoaX.setNome("João");
         PessoaX.setSobrenome("Batista");

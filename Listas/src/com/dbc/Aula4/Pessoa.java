@@ -7,7 +7,13 @@ public class Pessoa {
     private int idade;
     private String whatsapp;
 
+    public Pessoa() {
+    }
 
+    public Pessoa(String nome, String sobrenome) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+    }
 
     public String getNome() {
         return nome;
