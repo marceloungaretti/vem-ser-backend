@@ -34,6 +34,8 @@ public class Main {
         pedro.enderecos[1] = enderecoGenerico;
         pedro.contatos[1] = contatoGenerico;
 
+        var maicon = new Cliente("Maicon", "2313123123", new Contato[442124], new Endereco[2]);
+
         var contaJoao = new ContaCorrente();
         contaJoao.cliente = joao;
         contaJoao.agencia = 123;

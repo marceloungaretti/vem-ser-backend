@@ -6,6 +6,16 @@ public class Cliente {
     Contato[] contatos = new Contato[2];
     Endereco[] enderecos = new Endereco[2];
 
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String cpf, Contato[] contatos, Endereco[] enderecos) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.contatos = contatos;
+        this.enderecos = enderecos;
+    }
+
     public void imprimirContatos() {
         for(Contato item : this.contatos) {
             item.imprimirContato();
