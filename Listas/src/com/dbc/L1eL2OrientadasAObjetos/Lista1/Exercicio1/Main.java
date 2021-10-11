@@ -7,13 +7,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Apresentacao fulano = new Apresentacao();
         System.out.println("Digite seu nome: ");
-        fulano.nome = scanner.next();
+        fulano.setNome(scanner.next());
         System.out.println("Digite a sua idade: ");
-        fulano.idade = scanner.nextInt();
+        fulano.setIdade(scanner.nextInt());
         System.out.println("Qual a sua cidade?");
-        fulano.cidade = scanner.next();
+        fulano.setCidade(scanner.next());
         System.out.println("Em qual estado fica a sua cidade?");
-        fulano.estado = scanner.next();
+        fulano.setEstado(scanner.next());
 
         fulano.imprimirApresentacao();
 
