@@ -5,6 +5,10 @@ public class Barco extends Veiculo{
     private int velocidadeMaxima;
     private String materialCasco;
 
+    public Barco(String nome, int quilometragem) {
+        super(nome, quilometragem);
+    }
+
     public int getMaxPassageiros() {
         return maxPassageiros;
     }

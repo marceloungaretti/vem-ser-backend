@@ -4,6 +4,16 @@ public abstract class Veiculo {
     private int quilometragem;
     private String nome;
 
+
+    public Veiculo(String nome, int quilometragem) {
+        super();
+    }
+
+    public Veiculo() {
+
+    }
+
+
     public int getQuilometragem() {
         return quilometragem;
     }

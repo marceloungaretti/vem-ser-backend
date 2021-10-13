@@ -1,11 +1,27 @@
-package com.dbc.Aula4.Heranca;
+package com.dbc.aula5.exercicio2;
 
-public class Carroca extends Veiculo{
+public class Carroca implements Veiculo{
+    private String nome;
+    private int quilometragem;
     private int quantidadeDeCavalos;
     private int velocidadeMaxima;
 
-    public Carroca(String nome, int quilometragem) {
-        super(nome, quilometragem);
+    @Override
+    public int getQuilometragem() {
+        return quilometragem;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setQuilometragem(int quilometragem) {
+        this.quilometragem = quilometragem;
     }
 
     public int getQuantidadeDeCavalos() {

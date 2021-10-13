@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Identificador {
 
-    public void identificar() {
+    public static void identificar() {
         Scanner scanner = new Scanner(System.in);
         int valor = 3;
         int[] valores = new int[valor];

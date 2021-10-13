@@ -5,6 +5,14 @@ public class Carro extends Veiculo{
     private int potencia;
     private int velocidadeMaxima;
 
+    public Carro(String nome, int quilometragem) {
+        super(nome, quilometragem);
+    }
+
+    public Carro() {
+        super();
+    }
+
 
     public String getModeloMotor() {
         return modeloMotor;
