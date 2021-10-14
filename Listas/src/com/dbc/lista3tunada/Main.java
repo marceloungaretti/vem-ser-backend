@@ -27,16 +27,16 @@ public class Main {
         Cliente joao = new Cliente();
         joao.setNome("Jõao");
         joao.setCpf("123456789-10");
-        joao.setEnderecos(enderecoGenerico);
-        joao.setEnderecos(enderecoGenerico2);
+        joao.getEnderecos()[0] = enderecoGenerico;
+        joao.getEnderecos()[1] = enderecoGenerico2;
         joao.setContatos(contatogenerico);
         joao.setContatos(contatogenerico2222);
 
         var pedro = new Cliente();
         pedro.setNome("Pedro");
         pedro.setCpf("123456789-11");
-        pedro.setEnderecos(enderecoGenerico);
-        pedro.setEnderecos(enderecoGenerico2);
+        pedro.getEnderecos()[0] = enderecoGenerico;
+        pedro.getEnderecos()[1] = enderecoGenerico2;
         pedro.setContatos(contatogenerico);
         pedro.setContatos(contatogenerico2222);
 

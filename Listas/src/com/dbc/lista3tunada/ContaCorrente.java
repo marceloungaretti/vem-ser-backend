@@ -14,7 +14,8 @@ public class ContaCorrente extends Conta implements Impressao{
     public void imprimir() {
         getCliente().imprimirCliente();
 
-        System.out.println("Agência: " + this.getAgencia()
+        System.out.println("CONTA CORRENTE- "
+                + "Agência: " + this.getAgencia()
                 + " Conta: " + this.getNumeroConta()
                 + " Saldo: " + this.getSaldo()
                 + " Limite Cheque Especial: " + this.getChequeEspecial() + "\n");
@@ -29,26 +30,8 @@ public class ContaCorrente extends Conta implements Impressao{
         return false;
     }
 
-    @Override
-    public boolean depositar (double valor) {
-        if (valor > 0) {
-            setSaldo(getSaldo() + valor);
-            return true;
-        }
-        return false;
-    }
 
     public double retornarSaldoComChequeEspecial() {
         return (getSaldo() + chequeEspecial);
-    }
-
-    @Override
-    public boolean transferir(Conta conta, double valor) {
-        if (valor > 0 && conta.getSaldo() >= valor) {
-            conta.depositar(valor);
-            this.sacar(valor);
-            return true;
-        }
-        return false;
     }
 }
