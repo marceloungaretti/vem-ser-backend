@@ -21,8 +21,8 @@ public class Main {
                 "RJ",
                 "Brasil");
 
-        Contato contatogenerico = new Contato();
-        Contato contatogenerico2222 = new Contato();
+        Contato contatogenerico = new Contato("99999990", "celular", 1);
+        Contato contatogenerico2222 = new Contato("9999991", "celular", 1);
 
         Cliente joao = new Cliente();
         joao.setNome("Jõao");

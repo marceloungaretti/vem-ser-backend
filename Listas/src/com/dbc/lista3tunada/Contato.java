@@ -18,7 +18,7 @@ public class Contato {
 
 
     public void imprimirContato() {
-        System.out.println("Descrição: " + this.getTipo());
+        System.out.println("Descrição: " + this.getDescricao());
         System.out.println("Telefone: " + this.getTelefone());
         System.out.println("Tipo:" + this.getTipo() + "\n");
     }
