@@ -31,8 +31,6 @@ public class Main {
         joao.setEnderecos(enderecoGenerico2);
         joao.setContatos(contatogenerico);
         joao.setContatos(contatogenerico2222);
-        joao.imprimirEnderecos();
-        joao.imprimirContatos();
 
         var pedro = new Cliente();
         pedro.setNome("Pedro");
@@ -41,31 +39,39 @@ public class Main {
         pedro.setEnderecos(enderecoGenerico2);
         pedro.setContatos(contatogenerico);
         pedro.setContatos(contatogenerico2222);
-        pedro.imprimirEnderecos();
-        pedro.imprimirContatos();
 
         //-------------------------------------------------------------------------
 
-        var contaJoao = new ContaCorrente();
-        contaJoao.setCliente(joao);
-        contaJoao.setAgencia("123");
-        contaJoao.setNumeroConta("121122");
-        contaJoao.setSaldo(450);
-        contaJoao.setChequeEspecial(1000);
+        var contaCorrenteJoao = new ContaCorrente();
+        contaCorrenteJoao.setCliente(joao);
+        contaCorrenteJoao.setAgencia("123");
+        contaCorrenteJoao.setNumeroConta("121122");
+        contaCorrenteJoao.setSaldo(1000);
+        contaCorrenteJoao.setChequeEspecial(200);
 
-        var contaPedro = new ContaCorrente();
+        var contaPagamentoJoao = new ContaPagamento();
+        contaPagamentoJoao.setCliente(joao);
+        contaPagamentoJoao.setAgencia("123");
+        contaPagamentoJoao.setNumeroConta("121123");
+        contaPagamentoJoao.setSaldo(1000);
+
+        var contaPedro = new ContaPoupanca();
         contaPedro.setCliente(pedro);
         contaPedro.setAgencia("124");
         contaPedro.setNumeroConta("989988");
-        contaPedro.setSaldo(200);
-        contaPedro.setChequeEspecial(500);
+        contaPedro.setSaldo(1000);
 
-
-        contaJoao.depositar(100);
-
-        contaJoao.transferir(contaPedro, 50);
-        contaJoao.imprimir();
+        contaCorrenteJoao.imprimir();
+        contaPagamentoJoao.imprimir();
         contaPedro.imprimir();
+        contaCorrenteJoao.sacar(200);
+        contaPagamentoJoao.transferir(contaPedro, 50);
+        contaPedro.depositar(50);
+        System.out.println("------------------------------------------------");
+        contaCorrenteJoao.imprimir();
+        contaPagamentoJoao.imprimir();
+        contaPedro.imprimir();
+
 
     }
 }

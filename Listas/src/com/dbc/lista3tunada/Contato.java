@@ -2,9 +2,9 @@ package com.dbc.lista3tunada;
 
 public class Contato {
 
-    String descricao;
-    String telefone;
-    int tipo;
+    private String descricao;
+    private String telefone;
+    private int tipo;
 
     public Contato() {
     }
@@ -18,8 +18,32 @@ public class Contato {
 
 
     public void imprimirContato() {
-        System.out.println("Descrição: " + this.descricao);
-        System.out.println("Telefone: " + this.telefone);
-        System.out.println("Tipo:" + this.tipo + "\n");
+        System.out.println("Descrição: " + this.getTipo());
+        System.out.println("Telefone: " + this.getTelefone());
+        System.out.println("Tipo:" + this.getTipo() + "\n");
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 }
