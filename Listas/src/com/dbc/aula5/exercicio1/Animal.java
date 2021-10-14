@@ -19,7 +19,7 @@ public abstract class Animal {
         return nome;
     }
 
-    public String setNome() {
+    public String setNome(String nome) {
         return this.nome = nome;
     }
 
