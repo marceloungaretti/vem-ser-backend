@@ -1,4 +1,4 @@
-package com.dbc.lista3tunada;
+package com.dbc.oo2_homework;
 
 public abstract class Conta implements Movimentacao {
     private Cliente cliente;

@@ -1,4 +1,4 @@
-package com.dbc.lista3tunada;
+package com.dbc.oo2_homework;
 
 public class ContaPoupanca extends Conta implements Impressao{
     private final static double JUROS_MENSAL = 1.01;

@@ -1,4 +1,4 @@
-package com.dbc.lista3tunada;
+package com.dbc.oo2_homework;
 
 public class ContaPagamento extends Conta implements Impressao{
     private final static double TAXA_SAQUE = 4.25;
