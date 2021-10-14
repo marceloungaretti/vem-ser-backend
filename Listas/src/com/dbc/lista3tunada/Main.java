@@ -47,27 +47,25 @@ public class Main {
         //-------------------------------------------------------------------------
 
         var contaJoao = new ContaCorrente();
-        contaJoao.cliente = joao;
-        contaJoao.agencia = "123";
-        contaJoao.numeroConta = "12112";
-        contaJoao.saldo = 450;
-        contaJoao.chequeEspecial = 1000;
+        contaJoao.setCliente(joao);
+        contaJoao.setAgencia("123");
+        contaJoao.setNumeroConta("121122");
+        contaJoao.setSaldo(450);
+        contaJoao.setChequeEspecial(1000);
 
         var contaPedro = new ContaCorrente();
-        contaPedro.cliente = pedro;
-        contaPedro.agencia = "124";
-        contaPedro.numeroConta = "998988";
-        contaPedro.saldo = 200;
-        contaPedro.chequeEspecial = 500;
+        contaPedro.setCliente(pedro);
+        contaPedro.setAgencia("124");
+        contaPedro.setNumeroConta("989988");
+        contaPedro.setSaldo(200);
+        contaPedro.setChequeEspecial(500);
 
 
         contaJoao.depositar(100);
 
-        contaPedro.cliente = pedro;
-
         contaJoao.transferir(contaPedro, 50);
-        contaJoao.imprimirContaCorrente();
-        contaPedro.imprimirContaCorrente();
+        contaJoao.imprimir();
+        contaPedro.imprimir();
 
     }
 }
