@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "6a59f4f2-e4a8-4ea5-9193-113f5f203741",
+		"name": "homework1_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /pessoa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/pessoa",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pessoa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /pessoa/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nome\": \"Luiz Carlos\",\r\n        \"dataNascimento\": \"1990-10-10\",\r\n        \"cpf\": \"12345678910\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/pessoa/1",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pessoa",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /pessoa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nome\": \"Luiz Carlos\",\r\n        \"dataNascimento\": \"1990-10-10\",\r\n        \"cpf\": \"12345678910\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/pessoa",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pessoa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /pessoa/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/pessoa/4",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pessoa",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /contato",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/contato",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contato"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /contato/{idPessoa}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"idContato\": 1,\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": \"048995876566\",\r\n        \"descricao\": \"whatsapp\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/contato/2",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contato",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /contato/{idPessoa}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"idContato\": 2221,\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": \"048995876566\",\r\n        \"descricao\": \"whatsapp\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/contato/1",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contato",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /contato/{idContato}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"idContato\": 1,\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": \"048995876566\",\r\n        \"descricao\": \"CELULAR iphone\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/contato/2221",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contato",
+						"2221"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /contato/{idContato}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://my-application-teste.herokuapp.com/contato/2221",
+					"protocol": "https",
+					"host": [
+						"my-application-teste",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contato",
+						"2221"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
