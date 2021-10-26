@@ -12,7 +12,7 @@
 	<artifactId>pessoaapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pessoa-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto para criação e atualização de dados de pessoas</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
