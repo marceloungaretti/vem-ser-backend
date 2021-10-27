@@ -25,7 +25,7 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa) {
+    public Pessoa create(@RequestBody Pessoa pessoa) throws Exception {
         return pessoaService.create(pessoa);
     }
 

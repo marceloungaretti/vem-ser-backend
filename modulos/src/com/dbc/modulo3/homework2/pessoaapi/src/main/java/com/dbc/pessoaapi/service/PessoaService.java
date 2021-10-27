@@ -2,6 +2,8 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.repository.PessoaRepository;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +21,16 @@ public class PessoaService {
 //        pessoaRepository = new PessoaRepository();
 //    }
 
-    public Pessoa create(Pessoa pessoa){
+    public Pessoa create(Pessoa pessoa) throws Exception {
+        if(StringUtils.isBlank(pessoa.getNome())){
+            throw new Exception("O campo Nome não pode estar em branco");
+        }
+        if(ObjectUtils.isEmpty(pessoa.getDataNascimento())){
+            throw new Exception("O campo dataNascimento não pode estar vazio");
+        }
+        if(StringUtils.isBlank(pessoa.getCpf()) ||StringUtils.length(pessoa.getCpf()) != 11) {
+            throw new Exception("O campo cpf deve ter 11 caracteres");
+        }
         return pessoaRepository.create(pessoa);
     }
 
