@@ -2,17 +2,22 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.repository.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PessoaService {
+
+    @Autowired
     private PessoaRepository pessoaRepository;
 
-    public PessoaService(){
-        pessoaRepository = new PessoaRepository();
-    }
+//    public PessoaService(){
+//        pessoaRepository = new PessoaRepository();
+//    }
 
     public Pessoa create(Pessoa pessoa){
         return pessoaRepository.create(pessoa);

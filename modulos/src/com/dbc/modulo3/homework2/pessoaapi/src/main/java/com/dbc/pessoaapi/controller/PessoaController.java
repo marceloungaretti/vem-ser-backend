@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/pessoa")
 public class PessoaController {
 
+    @Autowired
     private PessoaService pessoaService;
 
-    public PessoaController() {
-        pessoaService = new PessoaService();
-    }
+//    public PessoaController() {
+//        pessoaService = new PessoaService();
+//    }
 
     @GetMapping("/hello")
     public String hello() {
