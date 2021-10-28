@@ -1,6 +1,7 @@
 package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,10 +17,6 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
-
-//    public PessoaService(){
-//        pessoaRepository = new PessoaRepository();
-//    }
 
     public Pessoa create(Pessoa pessoa) throws Exception {
         if(StringUtils.isBlank(pessoa.getNome())){
@@ -50,4 +47,6 @@ public class PessoaService {
     public List<Pessoa> listByName(String nome) {
         return pessoaRepository.listByName(nome);
     }
+
+
 }

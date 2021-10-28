@@ -1,6 +1,7 @@
 package com.dbc.pessoaapi.repository;
 
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,7 +39,7 @@ public class PessoaRepository {
         Pessoa pessoaRecuperada = listaPessoas.stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não econtrada"));
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
@@ -49,7 +50,7 @@ public class PessoaRepository {
         Pessoa pessoaRecuperada = listaPessoas.stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não econtrada"));
         listaPessoas.remove(pessoaRecuperada);
     }
 
@@ -57,5 +58,18 @@ public class PessoaRepository {
         return listaPessoas.stream()
                 .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
                 .collect(Collectors.toList());
+    }
+
+    public Pessoa buscarPorId(Integer id) throws RegraDeNegocioException {
+        return listaPessoas.stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não econtrada"));
+    }
+
+    public void validarPessoa(Integer idPessoa) throws RegraDeNegocioException {
+        if (this.buscarPorId(idPessoa) == null) {
+            throw new RegraDeNegocioException("A pessoa nao existe");
+        }
     }
 }

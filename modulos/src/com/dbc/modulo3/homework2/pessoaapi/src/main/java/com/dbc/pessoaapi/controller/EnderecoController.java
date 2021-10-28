@@ -1,21 +1,25 @@
 package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.entity.Endereco;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
 
     @PostMapping
-    public Endereco create(@RequestBody Endereco endereco) {
+    public Endereco create(@Valid @RequestBody Endereco endereco) throws RegraDeNegocioException{
         return enderecoService.create(endereco);
     }
 
@@ -36,7 +40,7 @@ public class EnderecoController {
 
     @PutMapping("/{idEndereco}")
     public Endereco update(@PathVariable("idEndereco") Integer idEndereco,
-                           @RequestBody Endereco enderecoAtualizar) throws Exception {
+                           @Valid @RequestBody Endereco enderecoAtualizar) throws Exception {
         return enderecoService.update(idEndereco, enderecoAtualizar);
     }
 

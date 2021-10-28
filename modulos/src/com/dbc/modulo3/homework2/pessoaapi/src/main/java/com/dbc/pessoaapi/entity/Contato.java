@@ -1,10 +1,18 @@
 package com.dbc.pessoaapi.entity;
 
+import javax.validation.constraints.*;
+
 public class Contato {
     private Integer idContato;
     private Integer idPessoa;
+    @NotNull
     private TipoContato tipoContato;
+    @NotNull
+    @NotEmpty
+    @Size(max = 13, message = "deve ter no máximo 13 caracteres")
     private String numero;
+    @NotNull
+    @NotEmpty
     private String descricao;
 
     public Contato() {
