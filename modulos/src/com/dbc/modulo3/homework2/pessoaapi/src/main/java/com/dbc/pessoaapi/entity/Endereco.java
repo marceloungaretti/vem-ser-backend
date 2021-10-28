@@ -1,6 +1,7 @@
 package com.dbc.pessoaapi.entity;
 
 public class Endereco {
+    private Integer idEndereco;
     private Integer idPessoa;
     private TipoEndereco tipo;
     private String logradouro;
@@ -10,6 +11,22 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String pais;
+
+    public Endereco() {
+    }
+
+    public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
+        this.idEndereco = idEndereco;
+        this.idPessoa = idPessoa;
+        this.tipo = tipo;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+    }
 
     public Integer getIdPessoa() {
         return idPessoa;
@@ -81,5 +98,13 @@ public class Endereco {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public Integer getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(Integer idEndereco) {
+        this.idEndereco = idEndereco;
     }
 }

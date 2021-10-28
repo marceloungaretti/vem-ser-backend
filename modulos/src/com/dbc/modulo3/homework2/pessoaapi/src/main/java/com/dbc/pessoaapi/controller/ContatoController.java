@@ -1,7 +1,6 @@
 package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.entity.Contato;
-import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,6 @@ public class ContatoController {
     @Autowired
     private ContatoService contatoService;
 
-//    public ContatoController() {
-//        contatoService = new ContatoService();
-//    }
-
     @PostMapping
     public Contato create(@RequestBody Contato contato) {
         return contatoService.create(contato);
@@ -27,11 +22,6 @@ public class ContatoController {
     @GetMapping
     public List<Contato> list() {
         return contatoService.list();
-    }
-
-    @GetMapping("/byidpessoa")
-    public List<Contato> listByIdPessoa(@RequestParam("idPessoa") Integer id) {
-        return contatoService.listByIdPessoa(id);
     }
 
     @GetMapping("/{idPessoa}")
@@ -50,4 +40,11 @@ public class ContatoController {
     public void delete(@PathVariable("idContato") Integer id) throws Exception {
         contatoService.delete(id);
     }
+
+
+
+//    @GetMapping("/byidpessoa")
+//    public List<Contato> listByIdPessoa(@RequestParam("idPessoa") Integer id) {
+//        return contatoService.listByIdPessoa(id);
+//    }
 }
