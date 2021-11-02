@@ -1,63 +1,46 @@
 package com.dbc.pessoaapi.service;
 
-import com.dbc.pessoaapi.entity.Contato;
-import com.dbc.pessoaapi.entity.Pessoa;
-import com.dbc.pessoaapi.entity.TipoContato;
-import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.entity.ContatoEntity;
+import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.repository.ContatoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Service
+@RequiredArgsConstructor
 public class ContatoService {
+    private final ContatoRepository contatoRepository;
+    private final PessoaRepository pessoaRepository;
 
-    @Autowired
-    private ContatoRepository contatoRepository;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
-
-    public Contato create(Contato contato) throws Exception {
-        pessoaRepository.validarPessoa(contato.getIdPessoa());
-
-        if(contato.getTipoContato() != TipoContato.COMERCIAL && contato.getTipoContato() != TipoContato.RESIDENCIAL){
-            throw new RegraDeNegocioException("O campo Tipo Contato não é válido");
-        }
-        if(ObjectUtils.isEmpty(contato.getNumero())){
-            throw new Exception("O campo número não pode estar vazio");
-        }
-        if(StringUtils.length(contato.getNumero()) > 13) {
-            throw new Exception("O campo número não pode ter mais de 13 caracteres");
-        }
-        if(StringUtils.isEmpty(contato.getDescricao())) {
-            throw new Exception("O campo descrição não pode estar vazio");
-        }
-        return contatoRepository.create(contato);
-    }
-
-    public List<Contato> list(){
-        return contatoRepository.list();
-    }
-
-    public Contato update(Integer id,
-                         Contato contatoAtualizar) throws Exception {
-        pessoaRepository.validarPessoa(contatoAtualizar.getIdPessoa());
-        return contatoRepository.update(id, contatoAtualizar);
-    }
-
-    public void delete(Integer id) throws Exception {
+    public void delete(Long id) throws Exception {
         contatoRepository.delete(id);
     }
 
-    public List<Contato> listByIdPessoa(Integer id){
-        return contatoRepository.listByIdPessoa(id);
+    public ContatoEntity create(Integer idPessoa, ContatoEntity contatoEntity) throws Exception {
+        PessoaEntity pessoaEntity = pessoaRepository.list().stream()
+                .filter(x -> x.getIdPessoa().equals(idPessoa))
+                .findFirst().orElseThrow(() -> new Exception("Pessoa não encontrada"));
+        contatoEntity.setIdPessoa(pessoaEntity.getIdPessoa());
+        return contatoRepository.create(contatoEntity);
     }
 
+    public ContatoEntity update(Integer id, ContatoEntity contatoEntity) throws Exception {
+        return contatoRepository.update(id, contatoEntity);
+    }
+
+
+    public List<ContatoEntity> list() {
+        return contatoRepository.list();
+    }
+
+    public List<ContatoEntity> listByIdPessoa(Integer idPessoa) {
+        return contatoRepository.listByIdPessoa(idPessoa);
+    }
+
+    public ContatoEntity listByIdContato(Integer idContato) throws Exception {
+        return contatoRepository.listByIdContato(idContato);
+    }
 }

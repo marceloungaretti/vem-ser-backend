@@ -1,55 +1,40 @@
 package com.dbc.pessoaapi.service;
 
-import com.dbc.pessoaapi.entity.Endereco;
-import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
-import com.dbc.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EnderecoService {
+    private final EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
-
-    private void validarEndereco(Integer idEndereco) throws RegraDeNegocioException {
-        if(enderecoRepository.listByIdEndereco(idEndereco).size() == 0) {
-            throw new RegraDeNegocioException("O endereço não existe");
-        }
+    public void delete(Long id) throws Exception {
+        enderecoRepository.delete(id);
     }
 
-    public Endereco create(Endereco endereco) throws RegraDeNegocioException {
-        pessoaRepository.validarPessoa(endereco.getIdPessoa());
-        return enderecoRepository.create(endereco);
+    public EnderecoEntity create(Integer idPessoa, EnderecoEntity enderecoEntity) {
+        enderecoEntity.setIdPessoa(idPessoa);
+        return enderecoRepository.create(enderecoEntity);
     }
 
-    public List<Endereco> list() {
+    public EnderecoEntity update(Integer id, EnderecoEntity enderecoEntity) throws Exception {
+        return enderecoRepository.update(id, enderecoEntity);
+    }
+
+
+    public List<EnderecoEntity> list() {
         return enderecoRepository.list();
     }
 
-    public List<Endereco> listByIdEndereco(Integer idEndereco) {
-        return enderecoRepository.listByIdEndereco(idEndereco);
-    }
-
-    public List<Endereco> listByIdPessoa(Integer idPessoa) {
+    public List<EnderecoEntity> listByIdPessoa(Integer idPessoa) {
         return enderecoRepository.listByIdPessoa(idPessoa);
     }
 
-    public Endereco update(Integer idEndereco, Endereco enderecoAtualizar) throws Exception {
-        pessoaRepository.validarPessoa(enderecoAtualizar.getIdPessoa());
-        return enderecoRepository.update(idEndereco, enderecoAtualizar);
-    }
-
-    public void delete(Integer idEndereco) throws Exception {
-        this.validarEndereco(idEndereco);
-        enderecoRepository.delete(idEndereco);
+    public EnderecoEntity findById(Integer idEndereco) throws Exception {
+        return enderecoRepository.findById(idEndereco);
     }
 }

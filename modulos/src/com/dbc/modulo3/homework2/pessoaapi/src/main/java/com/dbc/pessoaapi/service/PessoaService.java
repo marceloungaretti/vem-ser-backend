@@ -1,52 +1,65 @@
 package com.dbc.pessoaapi.service;
 
-import com.dbc.pessoaapi.entity.Pessoa;
-import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.dto.PessoaCreateDTO;
+import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import freemarker.template.TemplateException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PessoaService {
+    private final PessoaRepository pessoaRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private EmailService emailService;
 
-    public Pessoa create(Pessoa pessoa) throws Exception {
-        if(StringUtils.isBlank(pessoa.getNome())){
-            throw new Exception("O campo Nome não pode estar em branco");
-        }
-        if(ObjectUtils.isEmpty(pessoa.getDataNascimento())){
-            throw new Exception("O campo dataNascimento não pode estar vazio");
-        }
-        if(StringUtils.isBlank(pessoa.getCpf()) ||StringUtils.length(pessoa.getCpf()) != 11) {
-            throw new Exception("O campo cpf deve ter 11 caracteres");
-        }
-        return pessoaRepository.create(pessoa);
+    public PessoaDTO create(PessoaCreateDTO pessoaCreateDTO) throws MessagingException, TemplateException, IOException {
+        PessoaEntity pessoaEntity = objectMapper.convertValue(pessoaCreateDTO, PessoaEntity.class);
+        PessoaEntity pessoaCriada = pessoaRepository.create(pessoaEntity);
+
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
+        emailService.envioCreateComTemplate(pessoaDTO);
+        return pessoaDTO;
     }
 
-    public List<Pessoa> list(){
-        return pessoaRepository.list();
+    public List<PessoaDTO> list() {
+        return pessoaRepository.list().stream()
+                .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Pessoa update(Integer id,
-                         Pessoa pessoaAtualizar) throws Exception {
-        return pessoaRepository.update(id, pessoaAtualizar);
+    public PessoaDTO update(Integer id,
+                            PessoaCreateDTO pessoaCreateDTO) throws Exception {
+        PessoaEntity entity = objectMapper.convertValue(pessoaCreateDTO, PessoaEntity.class);
+        PessoaEntity update = pessoaRepository.update(id, entity);
+        PessoaDTO dto = objectMapper.convertValue(update, PessoaDTO.class);
+        emailService.envioUpdateComTemplate(dto);
+        return dto;
     }
 
-    public void delete(Integer id) throws Exception {
-         pessoaRepository.delete(id);
+    public void delete(Integer idPessoa) throws Exception {
+        PessoaEntity pessoaEntity = pessoaRepository.buscarPorId(idPessoa);
+        PessoaEntity entity = objectMapper.convertValue(pessoaEntity, PessoaEntity.class);
+        PessoaDTO pessoaDTO = objectMapper.convertValue(entity, PessoaDTO.class);
+
+        pessoaRepository.delete(idPessoa);
+        emailService.envioDeleteComTemplate(pessoaDTO);
     }
 
-    public List<Pessoa> listByName(String nome) {
-        return pessoaRepository.listByName(nome);
+    public List<PessoaDTO> listByName(String nome) {
+        return pessoaRepository.listByName(nome).stream()
+                .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class))
+                .collect(Collectors.toList());
     }
-
-
 }

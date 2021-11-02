@@ -1,56 +1,71 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.dto.PessoaCreateDTO;
+import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.service.EmailService;
 import com.dbc.pessoaapi.service.PessoaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.dbc.pessoaapi.service.EmailService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pessoa")
 @Validated
+@RequiredArgsConstructor
+@Slf4j
 public class PessoaController {
+    private final PessoaService pessoaService;
+    private EmailService emailService;
 
-    @Autowired
-    private PessoaService pessoaService;
+    private String name;
 
-    String name = "name";
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
-        return new ResponseEntity<>(name, HttpStatus.OK);
+        log.trace("A TRACE Message");
+        log.debug("A DEBUG Message");
+        log.info("A INFO Message");
+        log.warn("A WARN Message");
+        log.error("An ERROR Message");
+        return new ResponseEntity<>(name, HttpStatus.ACCEPTED);
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody @Valid Pessoa pessoa) throws Exception {
-        return pessoaService.create(pessoa);
+    public PessoaDTO create(@RequestBody @Valid PessoaCreateDTO pessoaDTO)throws Exception{
+        log.info("iniciando criação da pessoa");
+        PessoaDTO pessoaEntityCriado = pessoaService.create(pessoaDTO);
+        log.info("pessoa criada com sucesso!");
+        return pessoaEntityCriado;
     }
 
     @GetMapping
-    public List<Pessoa> list() {
+    public List<PessoaDTO> list() {
         return pessoaService.list();
     }
 
     @GetMapping("/byname")
-    public List<Pessoa> listByName(@RequestParam("nome") String nome) {
+    public List<PessoaDTO> listByName(@RequestParam("nome") @NotEmpty(message = "nome da pessoa não informado") String nome) {
         return pessoaService.listByName(nome);
     }
 
 
     @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable("idPessoa") Integer id,
-                         @RequestBody @Valid Pessoa pessoaAtualizar) throws Exception {
-        return pessoaService.update(id, pessoaAtualizar);
+    public PessoaDTO update(@PathVariable("idPessoa") Integer id,
+                            @RequestBody @Valid PessoaCreateDTO pessoaCreateDTO) throws Exception {
+        return pessoaService.update(id, pessoaCreateDTO);
     }
 
     @DeleteMapping("/{idPessoa}")
-    public void delete(@PathVariable("idPessoa") @NotNull Integer id) throws Exception {
+    public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
     }
 }
