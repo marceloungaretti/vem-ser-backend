@@ -22,12 +22,21 @@ public class EnderecoRepository {
         enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 2, TipoEndereco.RESIDENCIAL, "Rua Leopoldo Faguntes", 456, "casa", "89999555", "Porto Alegre", "RS", "Brasil"));
     }
 
-    public void delete(Long id) throws Exception {
-        EnderecoEntity enderecoEntity = enderecoEntities.stream()
-                .filter(x -> x.getIdEndereco() == id.longValue())
+    public List<EnderecoEntity> list() {
+        return enderecoEntities;
+    }
+
+    public List<EnderecoEntity> listByIdPessoa(Integer idPessoa) {
+        return enderecoEntities.stream()
+                .filter(x -> x.getIdPessoa().equals(idPessoa))
+                .collect(Collectors.toList());
+    }
+
+    public EnderecoEntity findById(Integer idEndereco) throws Exception {
+        return enderecoEntities.stream()
+                .filter(x -> x.getIdEndereco().equals(idEndereco))
                 .findFirst()
-                .orElseThrow(() -> new Exception("endereço não econtrado"));
-        enderecoEntities.remove(enderecoEntity);
+                .orElseThrow(() -> new Exception("endereco não encontrado"));
     }
 
     public EnderecoEntity create(EnderecoEntity enderecoEntity) {
@@ -52,21 +61,11 @@ public class EnderecoRepository {
         return enderecoEntityAlterado;
     }
 
-
-    public List<EnderecoEntity> list() {
-        return enderecoEntities;
-    }
-
-    public List<EnderecoEntity> listByIdPessoa(Integer idPessoa) {
-        return enderecoEntities.stream()
-                .filter(x -> x.getIdPessoa().equals(idPessoa))
-                .collect(Collectors.toList());
-    }
-
-    public EnderecoEntity findById(Integer idEndereco) throws Exception {
-        return enderecoEntities.stream()
-                .filter(x -> x.getIdEndereco().equals(idEndereco))
+    public void delete(Integer id) throws Exception {
+        EnderecoEntity enderecoEntity = enderecoEntities.stream()
+                .filter(x -> x.getIdEndereco() == id.longValue())
                 .findFirst()
-                .orElseThrow(() -> new Exception("endereco não encontrado"));
+                .orElseThrow(() -> new Exception("endereço não econtrado"));
+        enderecoEntities.remove(enderecoEntity);
     }
 }

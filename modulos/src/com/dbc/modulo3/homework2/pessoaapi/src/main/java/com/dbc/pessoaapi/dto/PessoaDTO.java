@@ -1,5 +1,6 @@
 package com.dbc.pessoaapi.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -14,10 +15,13 @@ public class PessoaDTO {
     @NotEmpty
     @NotBlank
     @ToString.Exclude
+    @ApiModelProperty(value = "Nome")
     private String nome;
 
     @NotNull
+    @ApiModelProperty(value = "Data de Nascimento")
     private LocalDate dataNascimento;
 
+    @ApiModelProperty(value = "Email")
     private String email;
 }
