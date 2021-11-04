@@ -69,4 +69,11 @@ public class PessoaRepository {
 
         return pessoaRecuperada;
     }
+
+    public PessoaEntity getById(Integer id) throws Exception {
+        return listaPessoaEntities.stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+    }
 }

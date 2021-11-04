@@ -2,7 +2,8 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
-import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.client.DadosPessoaisClient;
+import com.dbc.pessoaapi.dto.DadosPessoaisDTO;
 import com.dbc.pessoaapi.service.EmailService;
 import com.dbc.pessoaapi.service.PessoaService;
 import io.swagger.annotations.ApiOperation;
@@ -10,12 +11,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.dbc.pessoaapi.service.EmailService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -28,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class PessoaController {
     private final PessoaService pessoaService;
+    private final DadosPessoaisClient dadosPessoaisClient;
     private EmailService emailService;
 
     private String name;
@@ -67,6 +65,8 @@ public class PessoaController {
         return pessoaService.list();
     }
 
+
+
     @ApiOperation(value = "Busca uma pessoa pelo seu nome")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a pessoa buscada com sucesso"),
@@ -77,6 +77,10 @@ public class PessoaController {
         return pessoaService.listByName(nome);
     }
 
+    @GetMapping("/{idPessoa}")
+    public PessoaDTO getById(@RequestParam("idPessoa") Integer idPessoa) throws Exception {
+        return pessoaService.getById(idPessoa);
+    }
 
     @ApiOperation(value = "Atualiza uma pessoa pelo seu nome")
     @ApiResponses(value = {
@@ -98,5 +102,10 @@ public class PessoaController {
     @DeleteMapping("/{idPessoa}")
     public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
+    }
+
+    @GetMapping("/dados-pessoais")
+    public List<DadosPessoaisDTO> listarDadosPessoais() {
+        return dadosPessoaisClient.listar();
     }
 }

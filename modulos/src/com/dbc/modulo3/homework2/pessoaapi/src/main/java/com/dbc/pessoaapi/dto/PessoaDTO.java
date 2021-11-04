@@ -24,4 +24,6 @@ public class PessoaDTO {
 
     @ApiModelProperty(value = "Email")
     private String email;
+
+    private DadosPessoaisDTO dadosPessoaisDTO;
 }

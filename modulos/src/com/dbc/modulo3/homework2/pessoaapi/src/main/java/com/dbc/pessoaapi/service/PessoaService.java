@@ -1,5 +1,7 @@
 package com.dbc.pessoaapi.service;
 
+import com.dbc.pessoaapi.client.DadosPessoaisClient;
+import com.dbc.pessoaapi.dto.DadosPessoaisDTO;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.PessoaEntity;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ObjectMapper objectMapper;
+    private final DadosPessoaisClient dadosPessoaisClient;
 
     @Autowired
     private EmailService emailService;
@@ -61,5 +64,13 @@ public class PessoaService {
         return pessoaRepository.listByName(nome).stream()
                 .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public PessoaDTO getById(Integer id) throws Exception {
+        PessoaEntity entity = pessoaRepository.getById(id);
+        DadosPessoaisDTO dadosPessoaisDTO = dadosPessoaisClient.getPorCpf(entity.getCpf());
+        PessoaDTO dto = objectMapper.convertValue(entity, PessoaDTO.class);
+        dto.setDadosPessoaisDTO(dadosPessoaisDTO);
+        return dto;
     }
 }
