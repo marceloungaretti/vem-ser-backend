@@ -52,7 +52,7 @@ public class EnderecoService {
         return enderecoDTO;
     }
 
-    public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws Exception {
+    public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws RegraDeNegocioException{
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoCreateDTO, EnderecoEntity.class);
         EnderecoEntity atualizado = enderecoRepository.update(idEndereco, enderecoEntity);
 

@@ -45,6 +45,7 @@ public class EnderecoController {
     @ApiOperation(value = "Atualiza um endereço pelo seu id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna o endereço atualizado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro, informação inserida inválida"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
     @PutMapping("/{id}")

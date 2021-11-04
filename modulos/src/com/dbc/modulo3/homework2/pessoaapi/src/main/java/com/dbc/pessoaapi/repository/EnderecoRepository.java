@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.repository;
 
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.TipoEndereco;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -45,20 +46,21 @@ public class EnderecoRepository {
         return enderecoEntity;
     }
 
-    public EnderecoEntity update(Integer id, EnderecoEntity enderecoEntity) throws Exception {
-        EnderecoEntity enderecoEntityAlterado = enderecoEntities.stream()
-                .filter(x -> x.getIdEndereco().equals(id))
+    public EnderecoEntity update(Integer idEndereco, EnderecoEntity enderecoEntityAtualizar) throws RegraDeNegocioException {
+        EnderecoEntity enderecoEntityProcurar = enderecoEntities.stream()
+                .filter(enderecoEntity -> enderecoEntity.getIdEndereco().equals(idEndereco))
                 .findFirst()
-                .orElseThrow(() -> new Exception("endereço não econtrado"));
-        enderecoEntityAlterado.setTipo(enderecoEntity.getTipo());
-        enderecoEntityAlterado.setLogradouro(enderecoEntity.getLogradouro());
-        enderecoEntityAlterado.setNumero(enderecoEntity.getNumero());
-        enderecoEntityAlterado.setComplemento(enderecoEntity.getComplemento());
-        enderecoEntityAlterado.setCep(enderecoEntity.getCep());
-        enderecoEntityAlterado.setCidade(enderecoEntity.getCep());
-        enderecoEntityAlterado.setEstado(enderecoEntity.getEstado());
-        enderecoEntityAlterado.setPais(enderecoEntity.getPais());
-        return enderecoEntityAlterado;
+                .orElseThrow(() -> new RegraDeNegocioException("Endereco não localizado"));
+        enderecoEntityProcurar.setTipo(enderecoEntityAtualizar.getTipo());
+        enderecoEntityProcurar.setLogradouro(enderecoEntityAtualizar.getLogradouro());
+        enderecoEntityProcurar.setNumero(enderecoEntityAtualizar.getNumero());
+        enderecoEntityProcurar.setComplemento(enderecoEntityAtualizar.getComplemento());
+        enderecoEntityProcurar.setCep(enderecoEntityAtualizar.getCep());
+        enderecoEntityProcurar.setCidade(enderecoEntityAtualizar.getCidade());
+        enderecoEntityProcurar.setEstado(enderecoEntityAtualizar.getEstado());
+        enderecoEntityProcurar.setPais(enderecoEntityAtualizar.getPais());
+
+        return enderecoEntityProcurar;
     }
 
     public void delete(Integer id) throws Exception {

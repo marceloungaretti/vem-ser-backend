@@ -5,9 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnderecoEntity {
