@@ -18,4 +18,7 @@ public interface DadosPessoaisClient {
     @RequestLine("GET /dados-pessoais/{cpf}")
     DadosPessoaisDTO getPorCpf(@Param("cpf") String cpf);
 
+    @RequestLine("POST /dados-pessoais")
+    DadosPessoaisDTO createDadosPessoais(DadosPessoaisDTO dadosPessoaisDTO);
+
 }

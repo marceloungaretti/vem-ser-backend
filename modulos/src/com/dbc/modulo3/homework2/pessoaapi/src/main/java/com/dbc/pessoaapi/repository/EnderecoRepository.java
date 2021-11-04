@@ -18,9 +18,9 @@ public class EnderecoRepository {
 
     @PostConstruct
     public void init() {
-        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 1, TipoEndereco.RESIDENCIAL, "Rua Pedro José", 4156, "casa", "89999555", "Florianópolis", "SC", "Brasil"));
-        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 1, TipoEndereco.COMERCIAL, "Rua José dos Santos", 123, "sala 25", "85965656", "Porto Alegre", "RS", "Brasil"));
-        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 2, TipoEndereco.RESIDENCIAL, "Rua Leopoldo Faguntes", 456, "casa", "89999555", "Porto Alegre", "RS", "Brasil"));
+        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 1, TipoEndereco.RESIDENCIAL, "Rua João da silva Um", 4156, "apto 506", "89999555", "Florianópolis", "SC", "Brasil"));
+        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 1, TipoEndereco.COMERCIAL, "Rua José dos Santos Dois", 123, "sala 2", "85965656", "Porto Alegre", "RS", "Brasil"));
+        enderecoEntities.add(new EnderecoEntity(COUNTER.incrementAndGet(), 2, TipoEndereco.RESIDENCIAL, "Rua Luiz da Silva Três", 456, "casa", "89999555", "Porto Alegre", "RS", "Brasil"));
     }
 
     public List<EnderecoEntity> list() {

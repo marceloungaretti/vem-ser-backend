@@ -17,8 +17,6 @@ import javax.validation.constraints.Size;
 public class EnderecoCreateDTO {
 
 
-    @ApiModelProperty(value = "ID do endereço")
-    private Integer idEndereco;
     @ApiModelProperty(value = "ID da pessoa")
     private Integer idPessoa;
     @NotNull

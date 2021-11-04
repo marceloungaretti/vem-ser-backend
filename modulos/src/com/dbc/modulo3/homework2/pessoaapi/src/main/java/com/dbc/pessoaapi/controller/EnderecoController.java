@@ -48,9 +48,9 @@ public class EnderecoController {
             @ApiResponse(code = 400, message = "Erro, informação inserida inválida"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
-    @PutMapping("/{id}")
+    @PutMapping("/{idEndereco}")
     public EnderecoDTO update(@PathVariable("idEndereco") Integer idEndereco,
-                              @RequestBody @Valid EnderecoCreateDTO enderecoCreateDTO) throws Exception {
+                              @RequestBody @Valid EnderecoCreateDTO enderecoCreateDTO) throws RegraDeNegocioException {
         return enderecoService.update(idEndereco, enderecoCreateDTO);
     }
 
