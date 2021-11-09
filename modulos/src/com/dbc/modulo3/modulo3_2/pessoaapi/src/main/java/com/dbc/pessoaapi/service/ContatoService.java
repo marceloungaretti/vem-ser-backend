@@ -30,6 +30,7 @@ public class ContatoService {
 
 
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contatoCreateDTO) throws RegraDeNegocioException {
+        //ARRUMAR
         pessoaRepository.getById(idPessoa);
         ContatoEntity contatoEntity = objectMapper.convertValue(contatoCreateDTO, ContatoEntity.class);
         contatoEntity.setIdPessoa(idPessoa);

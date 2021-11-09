@@ -1,5 +1,6 @@
 package com.dbc.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Data // @Getter @Setter @ToString @EqualsAndHashCode @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class PessoaEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "dataNascimento")
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
     @Column(name = "cpf")
@@ -32,4 +34,8 @@ public class PessoaEntity {
 
     @Column(name = "email")
     private String email;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pessoaEntity")
+    private Set<ContatoEntity> contatos;
 }
