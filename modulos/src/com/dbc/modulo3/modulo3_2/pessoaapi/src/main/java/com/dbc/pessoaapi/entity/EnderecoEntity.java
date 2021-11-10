@@ -1,12 +1,13 @@
 package com.dbc.pessoaapi.entity;
 
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import java.util.Set;
 
-@Data // @Getter @Setter @ToString @EqualsAndHashCode @RequiredArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "ENDERECO_PESSOA")
@@ -41,6 +42,11 @@ public class EnderecoEntity {
 
     @Column(name = "pais")
     private String pais;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+    private Set<PessoaEntity> pessoas;
+
 
 
 }

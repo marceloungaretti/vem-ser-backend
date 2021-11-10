@@ -3,8 +3,6 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.ContatoCreateDTO;
 import com.dbc.pessoaapi.dto.ContatoDTO;
-import com.dbc.pessoaapi.dto.EnderecoDTO;
-import com.dbc.pessoaapi.entity.ContatoEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.service.ContatoService;
 import io.swagger.annotations.ApiOperation;

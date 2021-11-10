@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,4 +60,16 @@ public class PessoaService {
                 .orElseThrow(() -> new RegraDeNegocioException("pessoa não encontrada"));
         return entity;
     }
+
+    public Set<EnderecoEntity> listaDeEnd(Integer idPessoa) throws RegraDeNegocioException {
+        PessoaEntity entity = findById(idPessoa);
+        return entity.getEnderecos();
+    }
+
+//    public PessoaComContatoDTO listaDeCont(){
+//        PessoaEntity entity = findById(idPessoa);
+//        return entity.getC();
+//    }
+
+
 }

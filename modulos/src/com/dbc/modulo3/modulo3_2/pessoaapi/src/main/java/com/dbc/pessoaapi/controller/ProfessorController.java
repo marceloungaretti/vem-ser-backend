@@ -1,7 +1,5 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.dto.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.ProfessorEntity;
 import com.dbc.pessoaapi.repository.ProfessorRepository;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/professor")

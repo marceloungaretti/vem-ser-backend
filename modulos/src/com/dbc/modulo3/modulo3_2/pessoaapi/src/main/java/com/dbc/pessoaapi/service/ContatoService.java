@@ -2,8 +2,6 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.ContatoEntity;
-import com.dbc.pessoaapi.entity.EnderecoEntity;
-import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.ContatoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -11,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

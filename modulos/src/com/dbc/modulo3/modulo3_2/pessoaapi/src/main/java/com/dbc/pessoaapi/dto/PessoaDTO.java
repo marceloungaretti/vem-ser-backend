@@ -1,5 +1,6 @@
 package com.dbc.pessoaapi.dto;
 
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 public class PessoaDTO {
@@ -25,5 +27,7 @@ public class PessoaDTO {
     @ApiModelProperty(value = "Email")
     private String email;
 
-    private DadosPessoaisDTO dadosPessoaisDTO;
+    @ApiModelProperty("Endereço")
+    private Set<EnderecoEntity> enderecoEntitySet;
+
 }

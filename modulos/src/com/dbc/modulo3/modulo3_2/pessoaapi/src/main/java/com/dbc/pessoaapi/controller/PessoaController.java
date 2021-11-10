@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.dbc.pessoaapi.service.PessoaService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -67,7 +69,7 @@ public class PessoaController {
     @ApiOperation(value = "Atualiza uma pessoa pelo seu id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a pessoa atualizada com sucesso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
     @PutMapping("/{idPessoa}")
     public PessoaDTO update(@PathVariable("idPessoa") Integer id,
@@ -102,6 +104,16 @@ public class PessoaController {
                                               @RequestParam("finale") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finale){
         return pessoaRepository.findByDataNascimentoBetween(inicial, finale);
     }
+
+    @GetMapping("/{idPessoa}/enderecos")
+    public Set<EnderecoEntity> retornaEnderecos(@RequestParam("idPessoa") Integer idPessoa) throws Exception {
+        return pessoaService.listaDeEnd(idPessoa);
+    }
+
+
+
+
+
 
 
 }
