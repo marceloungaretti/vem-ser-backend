@@ -102,12 +102,13 @@ public class PessoaController {
 //    public PessoaEntity procuraPorCPF(@RequestParam("cpf") String cpf){
 //        return pessoaRepository.findByCpf(cpf);
 //    }
-
+//
 //    @GetMapping("nascidasEntre")
 //    public List<PessoaEntity> procuraNascidas(@RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicial,
 //                                              @RequestParam("finale") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finale){
 //        return pessoaRepository.findByDataNascimentoBetween(inicial, finale);
 //    }
+
 
 
     @ApiOperation(value = "Lista de Pessoas com Endereços por ID da Pessoa")
@@ -123,6 +124,29 @@ public class PessoaController {
 
         return pessoaService.listaDePessoasEContatos(idPessoa);
     }
+
+    ///////////////////////////////////////////////////////////
+
+    @ApiOperation(value = "Lista de Pessoas com Datas de Nascimento entre as seguintes datas")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna as pessoas com sucesso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+    })
+    @GetMapping("/lista-data-entre")
+    public List<PessoaEntity> findPessoasComNascimentoBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                               LocalDate inicial,
+                                                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                               LocalDate finale) {
+        return pessoaRepository.findPessoasComNascimentoBetween(inicial, finale);
+    }
+
+    @ApiOperation(value = "Lista de pessoas que possuem endereço")
+    @GetMapping("/pessoas-com-endereco")
+    public List<PessoaEntity> findByExistingEndereco() {
+        return pessoaRepository.findByExistingEndereco();
+    }
+
+
 
 
 

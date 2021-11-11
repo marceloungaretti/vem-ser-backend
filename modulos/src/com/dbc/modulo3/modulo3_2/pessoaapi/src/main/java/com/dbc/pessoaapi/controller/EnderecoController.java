@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.EnderecoDTO;
+import com.dbc.pessoaapi.dto.PessoaComEnderecoDTO;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Locale;
 
 @Validated
 @RestController
@@ -105,6 +107,27 @@ public class EnderecoController {
 //            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
 //    })
 //    public List<EnderecoEntity> listEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
+//        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
+//    }
+
+    @ApiOperation(value = "Busca os endereços de um pais")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+    })
+    @GetMapping("/endereco-por-pais")
+    public List<EnderecoEntity> listEnderecosPorPais(@RequestParam String pais) {
+        return enderecoRepository.listEnderecosPorPais(pais);
+    }
+
+    //corrigir
+//    @ApiOperation(value = "Endereços por ID da Pessoa")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+//    })
+//    @GetMapping("/enderecos-por-idpessoa")
+//    public List<EnderecoEntity> listaEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
 //        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
 //    }
 }

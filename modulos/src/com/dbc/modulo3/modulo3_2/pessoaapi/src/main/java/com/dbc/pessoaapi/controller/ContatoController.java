@@ -4,6 +4,7 @@ package com.dbc.pessoaapi.controller;
 import com.dbc.pessoaapi.dto.ContatoCreateDTO;
 import com.dbc.pessoaapi.dto.ContatoDTO;
 import com.dbc.pessoaapi.entity.ContatoEntity;
+import com.dbc.pessoaapi.entity.TipoContato;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.ContatoRepository;
 import com.dbc.pessoaapi.service.ContatoService;
@@ -82,19 +83,6 @@ public class ContatoController {
         return contatoService.getById(idContato);
     }
 
-//    // {{url}}/contato/list-by-pessoas?idPessoa=1&nome=Maicon Machado
-//    @ApiOperation(value = "Retorna uma lista de contatos por pessoas")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna a lista de contatos por pessoa"),
-//            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    @GetMapping("/list-by-pessoas")
-//    public List<ContatoDTO> listByIdPessoaRequestParam(@RequestParam("idPessoa") Integer id,
-//                                                          @RequestParam("nome") String nome) throws RegraDeNegocioException {
-//        System.out.println(nome);
-//        return contatoService.getByIdPessoa(id);
-//    }
 
     @ApiOperation(value = "Delete um contato pelo seu id")
     @ApiResponses(value = {
@@ -106,4 +94,15 @@ public class ContatoController {
     public void delete(@PathVariable("id") Integer idContato) throws RegraDeNegocioException {
         contatoService.delete(idContato);
     }
+
+    //corrigir
+//    @ApiOperation(value = "Lista os contatos por seu tipo")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna os contatos com sucesso"),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+//    })
+//    @GetMapping("/contatos-por-tipo")
+//    List<ContatoEntity> listContatosPorTipoContato(@RequestParam("tipoContato") Integer tipoContato) {
+//        return contatoRepository.listContatosPorTipo(tipoContato);
+//    }
 }
