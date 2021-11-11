@@ -11,15 +11,19 @@ import java.util.List;
 
 @Repository
 public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Integer> {
-//    @Query(value = "SELECT E FROM ENDERECO_PESSOA E WHERE E.ID_PESSOA = :idPessoa", nativeQuery = true)
-//    List<EnderecoEntity> listEnderecosPorIdPessoa(@Param("idPessoa") Integer idPessoa);
+    @Query("select p from ENDERECO_PESSOA p join p.pessoas pe where pe.idPessoa = :idPessoa")
+    List<EnderecoEntity> listEnderecosPorIdPessoa(@Param("idPessoa") Integer idPessoa);
 
-    @Query(value = "SELECT E FROM ENDERECO_PESSOA E WHERE PAIS = :pais")
+    @Query(value = "SELECT E FROM ENDERECO_PESSOA E WHERE upper(pais) like upper(:pais)")
     List<EnderecoEntity> listEnderecosPorPais(String pais);
 
-    //corrigir
-//    @Query(value = "SELECT E FROM ENDERECO_PESSOA E WHERE E.idPessoa = :idPessoa")
-//    List<EnderecoEntity> listEnderecosPorIdPessoa(Integer idPessoa);
+    @Query(value = "SELECT * FROM ENDERECO_PESSOA e WHERE upper(cidade) like upper(:cidade) AND upper(pais) like upper(:pais)", nativeQuery = true)
+    List<EnderecoEntity> findEnderecoCidadePais(String cidade, String pais);
+
+    @Query(value = "SELECT * FROM ENDERECO_PESSOA e WHERE complemento is null", nativeQuery = true)
+    List<EnderecoEntity> findEnderecoComplementoIsNull();
+
+
 
 //    @Query("select p from PESSOA p where where p.cpf = ?1")
 //    PessoaEntity procurarPorCpf(String cpf);

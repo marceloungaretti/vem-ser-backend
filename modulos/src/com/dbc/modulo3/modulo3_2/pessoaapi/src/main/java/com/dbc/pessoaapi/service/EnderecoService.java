@@ -50,12 +50,12 @@ public class EnderecoService {
     }
 
 
-    public List<EnderecoDTO> getByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
-        pessoaRepository.findById(idPessoa);
-        return enderecoRepository.findById(idPessoa).stream()
-                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
-                .collect(Collectors.toList());
-    }
+//    public List<EnderecoDTO> getByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
+//        pessoaRepository.findById(idPessoa);
+//        return enderecoRepository.findById(idPessoa).stream()
+//                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+//                .collect(Collectors.toList());
+//    }
 
 
     public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws RegraDeNegocioException {

@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface ContatoRepository extends JpaRepository<ContatoEntity, Integer> {
 
-    @Query(value = "SELECT * FROM CONTATO C WHERE C.ID_PESSOA = idPessoa", nativeQuery = true)
-    List<ContatoEntity> listContatosPorIdPessoa(Integer idPessoa);
+    //corrigirrr
+//    @Query(value = "SELECT * FROM CONTATO c WHERE c.id_pessoa = :idPessoa", nativeQuery = true)
+//    List<ContatoEntity> findContatoPorIdPessoa(Integer idPessoa);
 
-    //corrigir
-//    @Query(value = "SELECT C FROM CONTATO C WHERE C.TIPO = :tipo")
-//    List<ContatoEntity> listContatosPorTipo(Integer tipo);
+    @Query("select p from CONTATO p where p.tipo = :tipo ")
+    List<ContatoEntity> listaPorTipoContato(TipoContato tipo);
 }

@@ -17,13 +17,15 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     @Query("select p from PESSOA p where p.dataNascimento BETWEEN :inicial AND :finale" )
     List<PessoaEntity> findPessoasComNascimentoBetween(LocalDate inicial, LocalDate finale);
 
-    @Query("SELECT P FROM PESSOA P WHERE P.enderecos NOT NULL")
+    @Query("select p from PESSOA p join p.enderecos e")
     List<PessoaEntity> findByExistingEndereco();
 
-//    List<PessoaEntity> findByNomeContainsIgnoreCase(String nome);
-//    PessoaEntity findByCpf(String cpf);
-//    List<PessoaEntity> findByDataNascimentoBetween(LocalDate inicial, LocalDate finale);
-//    List<PessoaEntity> findByEndereco(String nome);
+    ///corrigir
+//    @Query("select p from ENDERECO_PESSOA p join p.pessoas pe where p.endereco is null")
+//    List<PessoaEntity> findBySemEndereco();
+
+
+
 
 
 

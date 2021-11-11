@@ -67,15 +67,15 @@ public class EnderecoController {
         return enderecoService.list();
     }
 
-    @ApiOperation(value = "Busca endereço pelo id da pessoa")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna endereço com sucesso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-    })
-    @GetMapping("/{idPessoa}/pessoa")
-    public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-        return enderecoService.getByIdPessoa(idPessoa);
-    }
+//    @ApiOperation(value = "Busca endereço pelo id da pessoa")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna endereço com sucesso"),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+//    })
+//    @GetMapping("/{idPessoa}/pessoa")
+//    public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
+//        return enderecoService.getByIdPessoa(idPessoa);
+//    }
 
     @ApiOperation(value = "Busca um endereço pelo id do endereço")
     @ApiResponses(value = {
@@ -101,14 +101,6 @@ public class EnderecoController {
         log.info("Endereço deletado com sucesso!");
     }
 
-//    @ApiOperation(value = "Busca os endereços de uma pessoa pelo ID da pessoa")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    public List<EnderecoEntity> listEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
-//        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
-//    }
 
     @ApiOperation(value = "Busca os endereços de um pais")
     @ApiResponses(value = {
@@ -121,13 +113,25 @@ public class EnderecoController {
     }
 
     //corrigir
-//    @ApiOperation(value = "Endereços por ID da Pessoa")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    @GetMapping("/enderecos-por-idpessoa")
-//    public List<EnderecoEntity> listaEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
-//        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
-//    }
+    @ApiOperation(value = "Endereços por ID da Pessoa")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+    })
+    @GetMapping("/enderecos-por-idpessoa")
+    public List<EnderecoEntity> listaEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
+        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
+    }
+
+    @ApiOperation(value = "(native) Endereços por Cidade e Pais")
+    @GetMapping("/endereco-por-cidade-pais-native")
+    public List<EnderecoEntity> findEnderecoCidadePais(@RequestParam String cidade, @RequestParam String pais) {
+        return enderecoRepository.findEnderecoCidadePais(cidade, pais);
+    }
+
+    @ApiOperation(value = "(native)Endereços complemento null")
+    @GetMapping("/endereco-complemento-null-native")
+    public List<EnderecoEntity> findEnderecoComplementoIsNull() {
+        return enderecoRepository.findEnderecoComplementoIsNull();
+    }
 }

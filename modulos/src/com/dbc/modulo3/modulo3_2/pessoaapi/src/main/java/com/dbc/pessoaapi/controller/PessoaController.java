@@ -140,11 +140,20 @@ public class PessoaController {
         return pessoaRepository.findPessoasComNascimentoBetween(inicial, finale);
     }
 
+
     @ApiOperation(value = "Lista de pessoas que possuem endereço")
     @GetMapping("/pessoas-com-endereco")
     public List<PessoaEntity> findByExistingEndereco() {
         return pessoaRepository.findByExistingEndereco();
     }
+
+//    @ApiOperation(value = "(native)Lista de pessoas sem endereço")
+//    @GetMapping("/pessoas-sem-endereco")
+//    public List<PessoaEntity> findBySemEndereco() {
+//        return pessoaRepository.findBySemEndereco();
+//    }
+
+
 
 
 

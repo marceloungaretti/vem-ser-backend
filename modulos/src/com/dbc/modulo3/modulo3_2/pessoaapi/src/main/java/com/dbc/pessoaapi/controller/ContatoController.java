@@ -26,7 +26,6 @@ public class ContatoController {
     private final ContatoRepository contatoRepository;
 
 
-
     @ApiOperation(value = "Cria um novo contato")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna o contato criado com sucesso"),
@@ -46,7 +45,7 @@ public class ContatoController {
     })
     @PutMapping("/{id}")
     public ContatoDTO update(@PathVariable("id") Integer id,
-                                @RequestBody ContatoCreateDTO contatoCreateDTO) throws RegraDeNegocioException {
+                             @RequestBody ContatoCreateDTO contatoCreateDTO) throws RegraDeNegocioException {
         return contatoService.update(id, contatoCreateDTO);
     }
 
@@ -61,16 +60,16 @@ public class ContatoController {
         return contatoService.list();
     }
 
-    // {{url}}/contato/1/pessoa
-    @ApiOperation(value = "Busca os contatos da pessoa pelo id da pessoa")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna o contato com sucesso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-    })
-    @GetMapping("/{idPessoa}")
-    List<ContatoEntity> listContatosPorIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
-        return contatoRepository.listContatosPorIdPessoa(idPessoa);
-    }
+//    // {{url}}/contato/1/pessoa
+//    @ApiOperation(value = "Busca os contatos da pessoa pelo id da pessoa")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna o contato com sucesso"),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+//    })
+//    @GetMapping("/{idPessoa}")
+//    List<ContatoEntity> listContatosPorIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
+//        return contatoRepository.listContatosPorIdPessoa(idPessoa);
+//    }
 
     // {{url}}/contato/1/contato
     @ApiOperation(value = "Busca um contato pelo id do contato")
@@ -95,14 +94,18 @@ public class ContatoController {
         contatoService.delete(idContato);
     }
 
-    //corrigir
-//    @ApiOperation(value = "Lista os contatos por seu tipo")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna os contatos com sucesso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    @GetMapping("/contatos-por-tipo")
-//    List<ContatoEntity> listContatosPorTipoContato(@RequestParam("tipoContato") Integer tipoContato) {
-//        return contatoRepository.listContatosPorTipo(tipoContato);
+    @ApiOperation(value = "Lista os contatos por tipo de contato")
+    @GetMapping("/contatos-por-tipo")
+    List<ContatoEntity> listaPorTipoContato(@RequestParam("tipo") TipoContato tipo) {
+        return contatoRepository.listaPorTipoContato(tipo);
+    }
+
+    //CORRIGIRRRR
+//    @ApiOperation(value = "(native)Lista contatos por idPessoa")
+//    @GetMapping("/contatos-por-idpessoa")
+//    List<ContatoEntity> findContatoPorIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
+//        return contatoRepository.findContatoPorIdPessoa(idPessoa);
 //    }
+
+
 }
