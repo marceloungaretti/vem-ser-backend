@@ -1,9 +1,6 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.dto.PessoaComContatoDTO;
-import com.dbc.pessoaapi.dto.PessoaComEnderecoDTO;
-import com.dbc.pessoaapi.dto.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
@@ -125,6 +122,19 @@ public class PessoaController {
         return pessoaService.listaDePessoasEContatos(idPessoa);
     }
 
+    @ApiOperation(value = "Lista Pessoa com todos seus dados")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna a pessoa com sucesso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+    })
+    @GetMapping("/pessoa-completo")
+    public List<PessoaComTodosDadosDTO> listaContatosEnderecos(@RequestParam(required = false) Integer idPessoa) throws RegraDeNegocioException {
+        return pessoaService.listaPessoaCompleto(idPessoa);
+
+    }
+
+
+
     ///////////////////////////////////////////////////////////
 
     @ApiOperation(value = "Lista de Pessoas com Datas de Nascimento entre as seguintes datas")
@@ -152,6 +162,8 @@ public class PessoaController {
     public List<PessoaEntity> findBySemEndereco() {
         return pessoaRepository.findBySemEndereco();
     }
+
+
 
 
 
