@@ -17,21 +17,19 @@ public class ContatoEntity {
     @Column(name = "id_contato")
     private Integer idContato;
 
-    @Column(name = "id_pessoa")
-    private Integer idPessoa;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
-    private PessoaEntity pessoaEntity;
-
     @Column(name = "tipo")
-    private TipoContato tipoContato;
+    @Enumerated()
+    private TipoContato tipo;
 
     @Column(name = "numero")
     private String numero;
 
     @Column(name = "descricao")
     private String descricao;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
+    private PessoaEntity pessoa;
 
 }

@@ -1,8 +1,15 @@
 package com.dbc.pessoaapi.dto;
 
+import lombok.*;
+
 import java.util.Set;
 
-public class PessoaComEnderecoDTO {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PessoaComEnderecoDTO extends PessoaDTO{
 
     private Set<EnderecoDTO> enderecos;
+
 }

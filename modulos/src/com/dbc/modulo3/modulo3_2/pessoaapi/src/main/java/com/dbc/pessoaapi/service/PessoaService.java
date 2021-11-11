@@ -1,7 +1,6 @@
 package com.dbc.pessoaapi.service;
 
-import com.dbc.pessoaapi.dto.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
@@ -10,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,15 +61,59 @@ public class PessoaService {
         return entity;
     }
 
-    public Set<EnderecoEntity> listaDeEnd(Integer idPessoa) throws RegraDeNegocioException {
-        PessoaEntity entity = findById(idPessoa);
-        return entity.getEnderecos();
+    public List<PessoaComEnderecoDTO> listaDePessoasEEnderecos(Integer idPessoa) throws RegraDeNegocioException {
+        List<PessoaComEnderecoDTO> listaDePe = new ArrayList<>();
+
+        if (idPessoa != null) {
+            PessoaEntity pessoaBuscada = findById(idPessoa);
+            var pessoaComEnderecoDTO = vinculaEnderecoPessoa(pessoaBuscada);
+            listaDePe.add(pessoaComEnderecoDTO);
+        } else {
+            var pessoas = pessoaRepository.findAll();
+            for (PessoaEntity pessoa : pessoas) {
+                var pessoaComEnderecoDTO = vinculaEnderecoPessoa(pessoa);
+                listaDePe.add(pessoaComEnderecoDTO);
+            }
+        }
+
+        return listaDePe;
     }
 
-//    public PessoaComContatoDTO listaDeCont(){
-//        PessoaEntity entity = findById(idPessoa);
-//        return entity.getC();
-//    }
+    public List<PessoaComContatoDTO> listaDePessoasEContatos(Integer idPessoa) throws RegraDeNegocioException {
+        List<PessoaComContatoDTO> listaDePe = new ArrayList<>();
+
+        if (idPessoa != null) {
+            PessoaEntity pessoaBuscada = findById(idPessoa);
+            var pessoaComContatoDTO = vinculaContatoPessoa(pessoaBuscada);
+            listaDePe.add(pessoaComContatoDTO);
+        } else {
+            var pessoas = pessoaRepository.findAll();
+            for (PessoaEntity pessoa : pessoas) {
+                var pessoaComContatoDTO = vinculaContatoPessoa(pessoa);
+                listaDePe.add(pessoaComContatoDTO);
+            }
+        }
+
+        return listaDePe;
+    }
+
+    private PessoaComContatoDTO vinculaContatoPessoa(PessoaEntity pessoaEntity) {
+        PessoaComContatoDTO pessoaComContatoDTO = objectMapper.convertValue(pessoaEntity, PessoaComContatoDTO.class);
+        pessoaComContatoDTO.setContatos(pessoaEntity.getContatos().stream()
+                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class)).collect(Collectors.toSet()));
+
+        pessoaComContatoDTO.setIdPessoa(pessoaEntity.getIdPessoa());
+        return pessoaComContatoDTO;
+    }
+
+    private PessoaComEnderecoDTO vinculaEnderecoPessoa(PessoaEntity pessoaEntity) {
+        PessoaComEnderecoDTO pessoaComEnderecoDTO = objectMapper.convertValue(pessoaEntity, PessoaComEnderecoDTO.class);
+        pessoaComEnderecoDTO.setEnderecos(pessoaEntity.getEnderecos().stream()
+                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class)).collect(Collectors.toSet()));
+
+        pessoaComEnderecoDTO.setIdPessoa(pessoaEntity.getIdPessoa());
+        return pessoaComEnderecoDTO;
+    }
 
 
 }

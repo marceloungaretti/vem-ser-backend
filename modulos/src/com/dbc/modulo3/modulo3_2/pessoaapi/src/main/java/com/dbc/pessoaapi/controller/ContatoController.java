@@ -3,11 +3,14 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.ContatoCreateDTO;
 import com.dbc.pessoaapi.dto.ContatoDTO;
+import com.dbc.pessoaapi.entity.ContatoEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.repository.ContatoRepository;
 import com.dbc.pessoaapi.service.ContatoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +18,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contato")
+@RequiredArgsConstructor
 public class ContatoController {
-    @Autowired
-    private ContatoService contatoService;
+
+    private final ContatoService contatoService;
+    private final ContatoRepository contatoRepository;
 
 
 
@@ -61,9 +66,9 @@ public class ContatoController {
             @ApiResponse(code = 200, message = "Retorna o contato com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
-    @GetMapping("/{idPessoa}/pessoa")
-    public List<ContatoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-        return contatoService.getByIdPessoa(idPessoa);
+    @GetMapping("/{idPessoa}")
+    List<ContatoEntity> listContatosPorIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
+        return contatoRepository.listContatosPorIdPessoa(idPessoa);
     }
 
     // {{url}}/contato/1/contato

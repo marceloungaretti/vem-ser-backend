@@ -32,7 +32,4 @@ public class PessoaCreateDTO {
         @NotNull
         @ApiModelProperty(value = "Email")
         private String email;
-
-        @ApiModelProperty(value = "Endereços")
-        private Set<EnderecoEntity> enderecos;
 }

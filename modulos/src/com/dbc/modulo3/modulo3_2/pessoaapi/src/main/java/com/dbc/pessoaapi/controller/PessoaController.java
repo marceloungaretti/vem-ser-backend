@@ -1,10 +1,14 @@
 package com.dbc.pessoaapi.controller;
 
+import com.dbc.pessoaapi.dto.PessoaComContatoDTO;
+import com.dbc.pessoaapi.dto.PessoaComEnderecoDTO;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
+import com.dbc.pessoaapi.service.EnderecoService;
 import com.dbc.pessoaapi.service.PessoaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -89,25 +93,35 @@ public class PessoaController {
         pessoaService.delete(id);
     }
 
-    @GetMapping("nomeContem")
-    public List<PessoaEntity> nomesQueContem(@RequestParam("nome") String nome)  {
-        return pessoaRepository.findByNomeContainsIgnoreCase(nome);
+//    @GetMapping("nomeContem")
+//    public List<PessoaEntity> nomesQueContem(@RequestParam("nome") String nome)  {
+//        return pessoaRepository.findByNomeContainsIgnoreCase(nome);
+//    }
+//
+//    @GetMapping("/buscacpf")
+//    public PessoaEntity procuraPorCPF(@RequestParam("cpf") String cpf){
+//        return pessoaRepository.findByCpf(cpf);
+//    }
+
+//    @GetMapping("nascidasEntre")
+//    public List<PessoaEntity> procuraNascidas(@RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicial,
+//                                              @RequestParam("finale") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finale){
+//        return pessoaRepository.findByDataNascimentoBetween(inicial, finale);
+//    }
+
+
+    @ApiOperation(value = "Lista de Pessoas com Endereços por ID da Pessoa")
+    @GetMapping("/listar-com-enderecos")
+    public List<PessoaComEnderecoDTO> listaPessoasComEndereco(@RequestParam(required = false) Integer idPessoa) throws RegraDeNegocioException {
+
+        return pessoaService.listaDePessoasEEnderecos(idPessoa);
     }
 
-    @GetMapping("/buscacpf")
-    public PessoaEntity procuraPorCPF(@RequestParam("cpf") String cpf){
-        return pessoaRepository.findByCpf(cpf);
-    }
+    @ApiOperation(value = "Lista de Pessoas com Contatos pelo ID da pessoa")
+    @GetMapping("/listar-com-contatos")
+    public List<PessoaComContatoDTO> listaPessoasComContato(@RequestParam(required = false) Integer idPessoa) throws RegraDeNegocioException {
 
-    @GetMapping("nascidasEntre")
-    public List<PessoaEntity> procuraNascidas(@RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicial,
-                                              @RequestParam("finale") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate finale){
-        return pessoaRepository.findByDataNascimentoBetween(inicial, finale);
-    }
-
-    @GetMapping("/{idPessoa}/enderecos")
-    public Set<EnderecoEntity> retornaEnderecos(@RequestParam("idPessoa") Integer idPessoa) throws Exception {
-        return pessoaService.listaDeEnd(idPessoa);
+        return pessoaService.listaDePessoasEContatos(idPessoa);
     }
 
 

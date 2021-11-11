@@ -2,11 +2,14 @@ package com.dbc.pessoaapi.dto;
 
 import com.dbc.pessoaapi.entity.TipoContato;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContatoCreateDTO {
     private Integer idPessoa;
 
@@ -14,7 +17,7 @@ public class ContatoCreateDTO {
     @NotNull
     @Max(1)
     @Min(0)
-    private TipoContato tipoContato;
+    private Integer tipoContato;
 
     @ApiModelProperty(value = "Número do telefone")
     @NotNull

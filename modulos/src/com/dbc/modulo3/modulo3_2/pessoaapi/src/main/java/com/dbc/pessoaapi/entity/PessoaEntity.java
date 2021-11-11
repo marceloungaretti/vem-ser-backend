@@ -34,7 +34,7 @@ public class PessoaEntity {
     private String email;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ContatoEntity> contatos;
 
     @JsonIgnore

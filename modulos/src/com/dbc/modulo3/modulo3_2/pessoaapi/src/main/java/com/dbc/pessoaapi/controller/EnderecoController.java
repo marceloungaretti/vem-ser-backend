@@ -3,7 +3,9 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.EnderecoDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.service.EnderecoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -23,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class EnderecoController {
     private final EnderecoService enderecoService;
+    private final EnderecoRepository enderecoRepository;
 
     @ApiOperation(value = "Cria um novo endereço para uma pessoa")
     @ApiResponses(value = {
@@ -95,4 +98,13 @@ public class EnderecoController {
         enderecoService.delete(idEndereco);
         log.info("Endereço deletado com sucesso!");
     }
+
+//    @ApiOperation(value = "Busca os endereços de uma pessoa pelo ID da pessoa")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna os endereços com sucesso"),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
+//    })
+//    public List<EnderecoEntity> listEnderecosPorIdPessoa(@RequestParam Integer idPessoa) {
+//        return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
+//    }
 }
