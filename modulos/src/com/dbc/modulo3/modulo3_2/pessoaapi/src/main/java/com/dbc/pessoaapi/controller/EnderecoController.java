@@ -123,7 +123,7 @@ public class EnderecoController {
         return enderecoRepository.listEnderecosPorIdPessoa(idPessoa);
     }
 
-    @ApiOperation(value = "(native) Endereços por Cidade e Pais")
+    @ApiOperation(value = "(native) Endereços por Cidade OU Pais")
     @GetMapping("/endereco-por-cidade-pais-native")
     public List<EnderecoEntity> findEnderecoCidadePais(@RequestParam String cidade, @RequestParam String pais) {
         return enderecoRepository.findEnderecoCidadePais(cidade, pais);

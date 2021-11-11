@@ -147,11 +147,11 @@ public class PessoaController {
         return pessoaRepository.findByExistingEndereco();
     }
 
-//    @ApiOperation(value = "(native)Lista de pessoas sem endereço")
-//    @GetMapping("/pessoas-sem-endereco")
-//    public List<PessoaEntity> findBySemEndereco() {
-//        return pessoaRepository.findBySemEndereco();
-//    }
+    @ApiOperation(value = "(native)Lista de pessoas sem endereço")
+    @GetMapping("/pessoas-sem-endereco")
+    public List<PessoaEntity> findBySemEndereco() {
+        return pessoaRepository.findBySemEndereco();
+    }
 
 
 
