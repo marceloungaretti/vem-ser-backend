@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final TokenService tokenService;
     private final AuthenticationService authenticationService;
 
@@ -31,10 +31,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable().and().cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
-//                .antMatchers("/contato").permitAll()
-                //escolhe as rotas que vai liberar
+
+                .antMatchers(HttpMethod.GET, "/pessoa/**", "/contato/**", "/endereco/**").hasAnyRole("MARKETING")
+                .antMatchers("/pessoa/**", "/contato/**", "/endereco/**").hasAnyRole("USUARIO")
+                .antMatchers("/**").hasRole("ADMIN")
+
+
+
 
                 .anyRequest().authenticated()
 
@@ -47,11 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/v2/api-docs",
                 "/swagger-ui.html",
                 "/swagger-resources/**"
-                );
+        );
     }
 
     @Bean
-    public AuthenticationManager authenticationManager () throws Exception {
+    public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
 }
