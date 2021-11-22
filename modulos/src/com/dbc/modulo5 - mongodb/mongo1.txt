@@ -58,3 +58,6 @@ db.alunos.find()
 db.alunos.insertOne({"nome": "Marcelo"})
 { acknowledged: true,
   insertedId: ObjectId("619bfbeeb78c969528045fe6") }
+
+db.alunos.deleteOne({ nome: 'Marcelo'})
+{ acknowledged: true, deletedCount: 1 }
