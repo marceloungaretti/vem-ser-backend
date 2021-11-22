@@ -1,0 +1,60 @@
+use alunos
+'switched to db alunos'
+{
+    "nome" : "João",
+    "data_nascimento" : new Date (1994,02,26), 
+    "curso" : {
+        "nome" : "Sistemas de informação"
+    },
+    "notas" : [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome" : "inglês",
+            "nível" : "avançado"
+        },
+        {
+            "nome" : "taekwondo",
+            "nível" : "básico"
+        }
+    ]
+}
+
+use vemserdbc
+'switched to db vemserdbc'
+db.alunos.insertOne({
+    "nome" : "João",
+    "data_nascimento" : new Date (1994,02,26), 
+    "curso" : {
+        "nome" : "Sistemas de informação"
+    },
+    "notas" : [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome" : "inglês",
+            "nível" : "avançado"
+        },
+        {
+            "nome" : "taekwondo",
+            "nível" : "básico"
+        }
+    ]
+})
+{ acknowledged: true,
+  insertedId: ObjectId("619bf67bb78c969528045fe5") }
+
+db.alunos.find()
+{ _id: ObjectId("619bf0fdb78c969528045fe4"),
+  nome: 'Rafael Lazzari',
+  data_nascimento: 1990-07-27T03:00:00.000Z }
+{ _id: ObjectId("619bf67bb78c969528045fe5"),
+  nome: 'João',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+
+db.alunos.insertOne({"nome": "Marcelo"})
+{ acknowledged: true,
+  insertedId: ObjectId("619bfbeeb78c969528045fe6") }
