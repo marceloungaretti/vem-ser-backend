@@ -1,0 +1,136 @@
+db.pokemon.updateOne(
+    {
+    "numero": 1
+},
+{ $set: {
+        "tipo": [
+            "PLANTA",
+            "VENENOSO"
+        ]
+    }
+}
+)
+
+db.pokemon.updateOne(
+    {
+    "numero": 2
+},
+{ $set: {
+        "tipo": [
+            "PLANTA",
+            "VENENOSO"
+        ]
+    }
+}
+)
+
+db.pokemon.updateOne(
+    {
+    "numero": 3
+},
+{ $set: {
+        "tipo": [
+            "PLANTA",
+            "VENENOSO"
+        ]
+    }
+}
+)
+
+db.pokemon.updateOne(
+    {
+    "numero": 4
+},
+{ $set: {
+        "tipo": [
+            "FOGO"
+        ]
+    }
+}
+)
+db.pokemon.find({"isLendario": false})
+{ _id: ObjectId("619d46dc220b1556359caa96"),
+  numero: 1,
+  nome: 'Bulbasaur',
+  altura: 0.6,
+  status: { hp: 50, ataque: 50, defesa: 50, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa97"),
+  numero: 2,
+  nome: 'Ivysaur',
+  altura: 1.1,
+  status: { hp: 75, ataque: 60, defesa: 60, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa98"),
+  numero: 3,
+  nome: 'Venusaur',
+  altura: 2,
+  status: { hp: 90, ataque: 80, defesa: 80, velocidade: 75 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa99"),
+  numero: 4,
+  nome: 'Charmander',
+  altura: 0.8,
+  status: { hp: 50, ataque: 50, defesa: 50, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'FOGO' ] }
+
+db.pokemon.find( { level_pokemon: { $gt: 5 } } )
+{ _id: ObjectId("619d4691220b1556359caa95"),
+  id_pokemon: 1,
+  numero_pokemon: 0,
+  nome_pokemon: 'Bulbasaur',
+  level_pokemon: 10,
+  peso_pokemon: 0,
+  altura_pokemon: 0,
+  categoria_pokemon: 'string',
+  regiao_dominante_poke_lendario: 'string',
+  hp_status: 45,
+  ataque_status: 49,
+  defesa_status: 49,
+  ataque_especial_status: 65,
+  defesa_especial_status: 65,
+  velocidade_status: 45,
+  fk_id_evolucao: null }
+
+db.pokemon.find( { altura: { $lt: 1 } } )
+{ _id: ObjectId("619d46dc220b1556359caa96"),
+  numero: 1,
+  nome: 'Bulbasaur',
+  altura: 0.6,
+  status: { hp: 50, ataque: 50, defesa: 50, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa99"),
+  numero: 4,
+  nome: 'Charmander',
+  altura: 0.8,
+  status: { hp: 50, ataque: 50, defesa: 50, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'FOGO' ] }
+
+db.pokemon.find({"nome": /saur/})
+{ _id: ObjectId("619d46dc220b1556359caa96"),
+  numero: 1,
+  nome: 'Bulbasaur',
+  altura: 0.6,
+  status: { hp: 50, ataque: 50, defesa: 50, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa97"),
+  numero: 2,
+  nome: 'Ivysaur',
+  altura: 1.1,
+  status: { hp: 75, ataque: 60, defesa: 60, velocidade: 50 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
+{ _id: ObjectId("619d46dc220b1556359caa98"),
+  numero: 3,
+  nome: 'Venusaur',
+  altura: 2,
+  status: { hp: 90, ataque: 80, defesa: 80, velocidade: 75 },
+  isLendario: false,
+  tipo: [ 'PLANTA', 'VENENOSO' ] }
