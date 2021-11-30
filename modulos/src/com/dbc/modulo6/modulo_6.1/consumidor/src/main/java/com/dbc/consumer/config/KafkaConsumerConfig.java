@@ -22,6 +22,8 @@ public class KafkaConsumerConfig {
     @Value(value = "${kafka.client-id}")
     private String clientId;
 
+
+
     private <T> Map<String, Object> consumerConfigs(Class<? extends Deserializer<T>> clazz,
                                                     String autoOffset) {
         Map<String, Object> props = new HashMap<>();

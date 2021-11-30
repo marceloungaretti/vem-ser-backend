@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProdutorController {
     private final Producer producer;
 
+
     @PostMapping("/send-geral")
     public void enviarMensagemGeral(@RequestBody ProdutorDTO produtorDTO) throws JsonProcessingException {
         producer.sendMessageGeral(produtorDTO);
