@@ -33,7 +33,8 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     @Query(value = "select * from PESSOA where upper(nome) like upper(:nome)", countQuery = "select count(*) from PESSOA where upper(nome) like upper(:nome)", nativeQuery = true)
     Page<PessoaEntity> findByNomeNativo(String nome, Pageable pageable);
 
-
+    @Query(value = "SELECT * FROM PESSOA P WHERE TO_CHAR(P.DATA_NASCIMENTO, 'DD/MM')  =  :data", nativeQuery = true)
+    List<PessoaEntity> searchAniversatiante(String data);
 
 
 //    @Query("select p from PESSOA p where where p.cpf = ?1")

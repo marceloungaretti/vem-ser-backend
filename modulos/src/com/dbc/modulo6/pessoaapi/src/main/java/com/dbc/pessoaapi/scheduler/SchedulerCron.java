@@ -16,17 +16,21 @@ import java.util.Date;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class MeuNovoSchedulerCron {
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+public class SchedulerCron {
     private final PessoaService pessoaService;
 
-    @Scheduled(cron = "0 0 8,20 * * *", zone = "GMT-3")
-    public void meuPrimeiroScheduler() throws InterruptedException, MessagingException, TemplateException, IOException {
+    @Scheduled(cron = "0 7 12 * * *")
+    public void pessoasSemEdereco() throws IOException, MessagingException, TemplateException {
         pessoaService.sendEmailPessoaSemEndereco();
     }
 
-    @Scheduled(cron = "0 0 0 23 12 ?", zone = "GMT-3")
-    public void schedulerNatal() throws MessagingException, TemplateException, IOException {
+    @Scheduled(cron = "0 11 12 * * *")
+    public void aniversariante() throws IOException {
+        pessoaService.sendAniversariante();
+    }
+
+    @Scheduled(cron = "0 11 12 * * *")
+    public void promo() throws IOException, MessagingException, TemplateException {
         pessoaService.sendEmailXororo();
     }
 }

@@ -4,7 +4,9 @@ import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
+import com.dbc.pessoaapi.kafka.Producer;
 import com.dbc.pessoaapi.repository.PessoaRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,25 +27,39 @@ public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ObjectMapper objectMapper;
     private final EmailService emailService;
+    private final Producer producer;
 
-    public void sendEmailPessoaSemEndereco() throws MessagingException, TemplateException, IOException {
-        List<PessoaEntity> pessoaSemEndereco = pessoaRepository.findBySemEndereco();
-        for (PessoaEntity key: pessoaSemEndereco){
-            emailService.sendEmailPessoa(objectMapper.convertValue(key, PessoaDTO.class), "Estamos muito felizes que você está em nosso sistema.\n" +
-                    "                            Para que possamos enviá-lo um brinde exclusivo, por gentileza,\n" +
-                    "                            adicione ou atualize o seu endereço no seu cadastro." +
-                    "                            Muito obrigado", "Atualize seu email!");
+    public void sendEmailPessoaSemEndereco() throws IOException {
+        List<PessoaEntity> pessoasSemEndereco = pessoaRepository.findBySemEndereco();
+        String message = "Estamos muito felizes que você está em nosso sistema." +
+                "<br>Para que possamos enviá-lo um brinde exclusivo, por gentileza," +
+                "<br>adicione ou atualize o seu endereço no seu cadastro.";
+        for (PessoaEntity key : pessoasSemEndereco) {
+            producer.sendMessage(new EmailDto(key.getNome(), key.getEmail(), "Atualize seu cadastro!", message));
         }
     }
 
     public void sendEmailXororo() throws MessagingException, TemplateException, IOException {
-        List<PessoaEntity> todasPessoas = pessoaRepository.findAll();
-        for (PessoaEntity key: todasPessoas){
-            emailService.sendEmailPessoa(objectMapper.convertValue(key, PessoaDTO.class),  "Selecionamos algumas das nossas" +
-                    " super promoções de natal na nossa plataforma especialmente para você: " +
-                    " -Na compra de 1 CD do Chitãozinho e Xororó, ganhe 1 do Milionário e José Rico.\n" +
-                    " -Na locação de um filme em VHS, a outra locação é grátis. \n" +
-                    " -Fita de Super Nintendo com 50% de desconto. \n\nAproveite...\nMagazine OldSchool", "PROMOÇÃO IMPERDÍVEL");
+        List<PessoaEntity> pessoas = pessoaRepository.findAll();
+        for (PessoaEntity key : pessoas) {
+            String message = "Selecionamos algumas das nossas super promoções de natal na nossa plataforma" +
+                    "<br>especialmente para você:" +
+                    "<br>- Na compra de 1 CD do Chitãozinho e Xororó, ganhe 1 do Milionário e José Rico." +
+                    "<br>- Na locação de um filme em VHS, a outra locação é grátis." +
+                    "<br>- Fita de Super Nintendo com 50% de desconto.";
+            producer.sendMessage(new EmailDto(key.getNome(), key.getEmail(), "Promoção de Natal!", message));
+        }
+    }
+
+    public void sendAniversariante() throws JsonProcessingException {
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM"));
+        List<PessoaEntity> aniversariantes = pessoaRepository.searchAniversatiante(date);
+        for (PessoaEntity key : aniversariantes) {
+            String message = "Essa data de " + date + " também é especial" +
+                    "<br>para nós do Vem Ser. Estamos comemorando junto com você. \\o/" +
+                    "<br><br>Desejamos um feliz aniversário, que sejam " + (LocalDate.now().getYear() - key.getDataNascimento().getYear()) + " anos de muitos." +
+                    "<br>Sucesso, alegria, felicidade e muitas realizações.";
+            producer.sendMessage(new EmailDto(key.getNome(), key.getEmail(), "Parabéns!", message));
         }
     }
 

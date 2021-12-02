@@ -50,19 +50,4 @@ public class EmailService {
 
         emailSender.send(mimeMessage);
     }
-
-    public void sendEmailAtualizaEnderecoKafka(String recipient, String subject, EmailDto emailDto) throws MailException {
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(remetente, "remetente");
-            messageHelper.setTo(remetente);
-            messageHelper.setSubject("assunto");
-            messageHelper.setText(emailDto.getTexto());
-        };
-        emailSender.send(messagePreparator);
-    }
-
-    public void sendEmailXororo(){
-
-    }
 }
