@@ -1,14 +1,17 @@
 package com.dbc.pessoaapi.service;
 
+import com.dbc.pessoaapi.dto.EmailDto;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -46,5 +49,20 @@ public class EmailService {
         helper.setText(html, true);
 
         emailSender.send(mimeMessage);
+    }
+
+    public void sendEmailAtualizaEnderecoKafka(String recipient, String subject, EmailDto emailDto) throws MailException {
+        MimeMessagePreparator messagePreparator = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+            messageHelper.setFrom(remetente, "remetente");
+            messageHelper.setTo(remetente);
+            messageHelper.setSubject("assunto");
+            messageHelper.setText(emailDto.getTexto());
+        };
+        emailSender.send(messagePreparator);
+    }
+
+    public void sendEmailXororo(){
+
     }
 }
